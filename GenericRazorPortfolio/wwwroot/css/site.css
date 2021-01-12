@@ -1,4 +1,8 @@
-﻿html * {
+﻿.staff-member img {
+    border-radius: 50%;
+}
+
+html * {
     font-family: 'Roboto', sans-serif;
 }
 
@@ -8,6 +12,10 @@
 
 .text-breakpoint {
     display: inline-block;
+}
+
+footer a:hover {
+    text-decoration: none;
 }
 
 footer img {
@@ -39,7 +47,7 @@ header {
 
 
 .index-jumbotron {
-    background: url("forest.jpg") no-repeat center center fixed;
+    background: url("../img/forest.jpg") no-repeat center center fixed;
     background-size: cover;
 }
 
@@ -53,10 +61,7 @@ header {
 }
 
 
-.our-staff {
-    background-color: aquamarine;
-}
 
-footer a:hover {
-    text-decoration: none;
+.our-staff {
+    background-color: mediumaquamarine;
 }
