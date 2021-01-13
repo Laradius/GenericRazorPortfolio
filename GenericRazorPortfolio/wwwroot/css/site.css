@@ -1,4 +1,9 @@
-﻿.staff-member img {
+﻿
+.editIcon {
+   background-color: black;
+}
+
+.staff-member img {
     border-radius: 50%;
 }
 

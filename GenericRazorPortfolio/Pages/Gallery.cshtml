@@ -31,38 +31,17 @@
 
     <div id="nanogallery2">gallery_made_with_nanogallery2</div>
 
+
+
+
+
+
     <script>
 
 
-        var a = null;
-        var done = null;
-
-
         jQuery(document).ready(function () {
-
-
-
-
-              a =  jQuery("#nanogallery2").nanogallery2({
-                    // ### gallery settings ###
-                    thumbnailHeight: 200,
-                  thumbnailWidth: 200,
-                  galleryRenderDelay: 0,
-
-                    thumbnailLabel: {
-                        position: "overImageOnBottom",
-                        display: false
-                    },
-                    descriptionMultiLine: true,
-                    thumbnailAlignment: "center",
-                    thumbnailOpenImage: true,
-
-                    viewerTools: {
-                        topLeft: "label"
-                    },
-
-                    // ### gallery content ###
-                  items: [
+            jQuery("#nanogallery2").nanogallery2({
+               items: [
                     @{
                         foreach (var image in Model.Images)
                         {
@@ -70,11 +49,12 @@
 
                                 if (!String.IsNullOrEmpty(image.Title)) {
 
-                                    <text>"@image.Title" by @image.Author</text>
+                                    <text>"@image.Title"</text>
 
                                 }
+                                <text>by @image.Author</text>
 
-                                } ', description: '@if (!String.IsNullOrEmpty(image.Description)) {@image.Description}' },
+                                } ', description: '@if (!String.IsNullOrEmpty(image.Description)) {@image.Description}',  customData: { imgId: @image.Id} },
 
 
                         }
@@ -82,21 +62,32 @@
 
 
                   ],
+                thumbnailWidth: 200,
+                thumbnailHeight: 200,
+                fnThumbnailInit: myTnInit,
+                locationHash: false
 
-
-
-                }
-
-
-               );
-
-
+            });
         });
 
 
 
-    </script>
 
+
+        // Add custom elements after one thumbnail is build
+        function myTnInit($e, item, GOMidx) {
+            var html = [];
+            html.push(
+                '<a @(Model.TokenValid ? "" : "hidden") href="/EditImage?id=', item.customData.imgId, '" style="text-shadow: 0 0 3px #000; position:absolute;top:10px;right:10px; color:white; font-size: 32px;"><i class="editIcon fas fa-pen-square"></i></a>')
+
+
+            $e.find('.nGY2GThumbnailSub').append(html.join(""));
+        }
+
+
+
+
+    </script>
 
 </div>
 
