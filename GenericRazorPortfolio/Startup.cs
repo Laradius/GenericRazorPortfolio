@@ -1,4 +1,6 @@
 using GenericRazorPortfolio.Data;
+using GenericRazorPortfolio.Helper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -19,9 +21,11 @@ namespace GenericRazorPortfolio
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            StaticConfig = Configuration;
         }
 
         public IConfiguration Configuration { get; }
+        public static IConfiguration StaticConfig { get; private set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -29,7 +33,14 @@ namespace GenericRazorPortfolio
             services.AddRazorPages();
             services.AddDbContext<GenericRazorPortfolioDbContext>(opt => opt.UseSqlServer(Configuration["ConnectionString"]));
             services.AddScoped<IGenericRazorPortfolioRepo, SqlGenericRazorPortfolioRepo>();
-           
+            services.AddScoped<IAuthenticator, JwtAuthenticator>();
+            services.AddScoped<IAuthorizer, JwtAuthorizer>();
+
+             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+             {
+              options.TokenValidationParameters = JwtAuthorizer.GetValidationParameters();
+             });
+
 
         }
 
@@ -52,8 +63,9 @@ namespace GenericRazorPortfolio
 
 
             app.UseRouting();
-
-            app.UseAuthorization();
+          app.UseMiddleware<JwtMiddleware>();
+           app.UseAuthentication();
+             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

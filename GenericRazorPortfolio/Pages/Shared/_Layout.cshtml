@@ -21,6 +21,7 @@
         <a asp-area="" asp-page="/Index"><img class="m-auto img-fluid d-block" src="~/img/logo.png" /> </a>
 
 
+
         <div class="container">
             <nav class="justify-content-center navbar navbar-expand-lg navbar-light ">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,6 +29,7 @@
                 </button>
 
                 <div class="text-center collapse navbar-collapse" id="navbarSupportedContent">
+
                     <ul class="text-uppercase m-auto navbar-nav mr-auto">
                         <li class="nav-item">
                             <a class="nav-link @(path == "/" ? "active" : "")" asp-area="" asp-page="/Index">Home <span class="sr-only">(current)</span></a>
@@ -38,6 +40,20 @@
 
 
                     </ul>
+
+                    @{
+                        var tokenExists = Context.Request.Cookies.TryGetValue("Token", out string value);
+
+                        if (tokenExists)
+                        {
+                            var validTokenExists = GenericRazorPortfolio.Helper.JwtAuthorizer.ValidateToken(value);
+                            if (validTokenExists)
+                            {
+                            <button onclick="document.cookie = 'Token' + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;'; location.reload();" type="button" class="btn btn-danger">Logout</button>
+                                }
+                            }
+                        }
+
 
                 </div>
             </nav>

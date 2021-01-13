@@ -11,6 +11,9 @@ namespace GenericRazorPortfolio.Data
 
         IEnumerable<ImageData> GetAllImageData();
 
+        Administrator GetAccountByEmail(string email);
+        Administrator GetAccountById(int id);
+
         void SaveChanges();
 
 

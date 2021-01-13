@@ -15,6 +15,16 @@ namespace GenericRazorPortfolio.Data
             _context = context;
         }
 
+        public Administrator GetAccountByEmail(string email)
+        {
+            return _context.Administrators.FirstOrDefault(x => email == x.Email);
+        }
+
+        public Administrator GetAccountById(int id)
+        {
+            return _context.Administrators.FirstOrDefault(x => id == x.Id);
+        }
+
         public IEnumerable<ImageData> GetAllImageData()
         {
             return _context.ImageData.ToList();

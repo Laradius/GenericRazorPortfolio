@@ -1,0 +1,39 @@
+﻿@page
+@model GenericRazorPortfolio.Pages.LoginModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+
+<div class="container py-5">
+    <h2 class="text-center mb-5">Login</h2>
+    <hr />
+    <div class="row">
+
+
+
+
+        <div class="col-md-3 col-1"></div>
+        <form method="post" class="py-5 bg-light rounded col-10 col-md-6 text-center">
+            <div class="form-group">
+                <label for="loginEmail">Email address</label>
+                <input asp-for="Admin.Email" type="email" class="form-control" id="loginEmail" aria-describedby="emailHelp" placeholder="Enter email">
+            </div>
+            <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <input asp-for="Admin.Password" type="password" class="form-control" id="loginPassword" placeholder="Password">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <div class="col-md-3 col-1"></div>
+
+
+    </div>
+
+</div>
+
+
+
+
+

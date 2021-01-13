@@ -16,6 +16,7 @@ namespace GenericRazorPortfolio.Data
 
         }
         public DbSet<ImageData> ImageData { get; set; }
+        public DbSet<Administrator> Administrators { get; set; }
 
     }
 }

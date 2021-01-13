@@ -3,14 +3,16 @@ using GenericRazorPortfolio.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GenericRazorPortfolio.Migrations
 {
     [DbContext(typeof(GenericRazorPortfolioDbContext))]
-    partial class GenericRazorPortfolioDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210113040500_Administrators")]
+    partial class Administrators
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
