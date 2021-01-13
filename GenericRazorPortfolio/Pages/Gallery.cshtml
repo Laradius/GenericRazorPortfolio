@@ -4,62 +4,102 @@
     ViewData["Title"] = "Gallery";
 }
 
+
+
 <div class="py-5 text-center">
 
     <h1>Our Gallery</h1>
+
+    <form method="post">
+        <input @(Model.TokenValid ? "" : "hidden") asp-page-handler="CreateImage" type="submit" value="Post Image" class="btn btn-success" />
+    </form>
+
 
 
 
     <link href="https://cdn.jsdelivr.net/npm/nanogallery2@3/dist/css/nanogallery2.min.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/nanogallery2@3/dist/jquery.nanogallery2.min.js"></script>
 
+    @{
+        for (int i = 0; i < Model.Images.Count; i++)
+        {
+            <a id="edit-@i" asp-page="EditImage" asp-route-id="@Model.Images[i].Id"><i class="fas fa-pen-square"></i></a>
+        }
 
-    <div class="container">
+    }
 
-        <div ID="ngy2p" data-nanogallery2='{
 
-        "thumbnailWidth": "200",
-        "thumbnailLabel": {
-          "position": "overImageOnBottom",
-          "display": false
-        },
-        "descriptionMultiLine" : true,
-        "thumbnailAlignment": "center",
-        "thumbnailOpenImage": true,
+    <div id="nanogallery2">gallery_made_with_nanogallery2</div>
 
-          "viewerTools":     {
-        "topLeft":    "label"
-      }
+    <script>
 
-      }'>
 
-            @foreach (var image in Model.Images)
-            {
-                @if (!String.IsNullOrEmpty(image.Description))
-                {
-                    @:Plain Text is good.
+        var a = null;
+        var done = null;
+
+
+        jQuery(document).ready(function () {
+
+
+
+
+              a =  jQuery("#nanogallery2").nanogallery2({
+                    // ### gallery settings ###
+                    thumbnailHeight: 200,
+                  thumbnailWidth: 200,
+                  galleryRenderDelay: 0,
+
+                    thumbnailLabel: {
+                        position: "overImageOnBottom",
+                        display: false
+                    },
+                    descriptionMultiLine: true,
+                    thumbnailAlignment: "center",
+                    thumbnailOpenImage: true,
+
+                    viewerTools: {
+                        topLeft: "label"
+                    },
+
+                    // ### gallery content ###
+                  items: [
+                    @{
+                        foreach (var image in Model.Images)
+                        {
+                            @:{ src: '@image.Link', srct: '@image.ThumbnailLink', title: '@{
+
+                                if (!String.IsNullOrEmpty(image.Title)) {
+
+                                    <text>"@image.Title" by @image.Author</text>
+
+                                }
+
+                                } ', description: '@if (!String.IsNullOrEmpty(image.Description)) {@image.Description}' },
+
+
+                        }
+                                }
+
+
+                  ],
+
+
+
                 }
 
-            <a href="@image.Link" data-ngthumb="@image.ThumbnailLink" data-ngdesc="@if (!String.IsNullOrEmpty(image.Description))
-            {
-                @:@image.Description
-                }">
 
-                @if (!String.IsNullOrEmpty(image.Title))
-                {
-                    @:'@image.Title'
-                }
-                by @image.Author
-
-            </a>
-            }
+               );
 
 
-        </div>
+        });
 
 
-    </div>
 
+    </script>
 
 
 </div>
+
+
+
+

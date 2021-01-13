@@ -23,20 +23,25 @@ namespace GenericRazorPortfolio.Pages
         }
 
         public List<ImageData> Images { get; set; }
+
+        public bool TokenValid { get; set; }
+
+        // public bool ValidTokenExists;
+
+
+        public IActionResult OnPostCreateImage()
+        {
+            return RedirectToPage("/CreateImage");
+        }
+
+       
+
         public IActionResult OnGet()
         {
 
-            if (this.ValidTokenExists())
-            {
-
-                Images = _repository.GetAllImageData().ToList();
+            Images = _repository.GetAllImageData().ToList();
+            TokenValid = this.ValidTokenExists();
                 return Page();
-            }
-            return RedirectToPage("/Index");
-
-
-
-
         }
     }
 }

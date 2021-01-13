@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace GenericRazorPortfolio.Helper
@@ -27,7 +28,15 @@ namespace GenericRazorPortfolio.Helper
             return false;
         }
 
-       
+       public static List<Claim> GetClaims(this PageModel model)
+        {
+            return  model.User.Claims.ToList();
+        } 
+
+        public static string GetClaimValue(this PageModel model, string claimName)
+        {
+           return model.User.Claims.FirstOrDefault(x => x.Type.Equals(claimName, StringComparison.OrdinalIgnoreCase))?.Value;
+        }
 
     }
 }

@@ -5,7 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Web;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.WebUtilities;
 
 namespace GenericRazorPortfolio.Pages
 {
@@ -23,9 +25,16 @@ namespace GenericRazorPortfolio.Pages
             _logger = logger;
         }
 
+       [BindProperty(SupportsGet = true)]
+        public int Code { get; set; }
+        public string Description { get; set; }
+
         public void OnGet()
         {
             RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
+
+            Description = ReasonPhrases.GetReasonPhrase(Code);
+
         }
     }
 }

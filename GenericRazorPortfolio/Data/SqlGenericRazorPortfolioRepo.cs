@@ -34,5 +34,15 @@ namespace GenericRazorPortfolio.Data
         {
             _context.SaveChanges();
         }
+
+        public void CreateImage(ImageData image)
+        {
+            _context.Add(image);
+        }
+
+        public Task SaveChangesAsync()
+        {
+            return _context.SaveChangesAsync();
+        }
     }
 }
