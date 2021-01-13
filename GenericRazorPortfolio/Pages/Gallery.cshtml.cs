@@ -24,12 +24,13 @@ namespace GenericRazorPortfolio.Pages
 
         public List<ImageData> Images { get; set; }
 
+
         public bool TokenValid { get; set; }
 
         // public bool ValidTokenExists;
 
 
-        public IActionResult OnPostCreateImage()
+        public IActionResult OnPost()
         {
             return RedirectToPage("/CreateImage");
         }

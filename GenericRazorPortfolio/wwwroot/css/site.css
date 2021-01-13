@@ -1,4 +1,8 @@
 ﻿
+* {
+    overflow-x: hidden;
+}
+
 .editIcon {
    background-color: black;
 }

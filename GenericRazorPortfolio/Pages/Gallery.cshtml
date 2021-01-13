@@ -11,7 +11,7 @@
     <h1>Our Gallery</h1>
 
     <form method="post">
-        <input @(Model.TokenValid ? "" : "hidden") asp-page-handler="CreateImage" type="submit" value="Post Image" class="btn btn-success" />
+        <input @(Model.TokenValid ? "" : "hidden") type="submit" value="Post Image" class="my-4 btn btn-success" />
     </form>
 
 
@@ -20,19 +20,13 @@
     <link href="https://cdn.jsdelivr.net/npm/nanogallery2@3/dist/css/nanogallery2.min.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/nanogallery2@3/dist/jquery.nanogallery2.min.js"></script>
 
-    @{
-        for (int i = 0; i < Model.Images.Count; i++)
-        {
-            <a id="edit-@i" asp-page="EditImage" asp-route-id="@Model.Images[i].Id"><i class="fas fa-pen-square"></i></a>
-        }
-
-    }
 
 
-    <div id="nanogallery2">gallery_made_with_nanogallery2</div>
+    <div class="container text-center">
 
+        <div id="nanogallery2">gallery_made_with_nanogallery2</div>
 
-
+    </div>
 
 
 
@@ -43,6 +37,9 @@
             jQuery("#nanogallery2").nanogallery2({
                items: [
                     @{
+
+                        if (Model.Images != null)
+
                         foreach (var image in Model.Images)
                         {
                             @:{ src: '@image.Link', srct: '@image.ThumbnailLink', title: '@{
@@ -61,15 +58,19 @@
                                 }
 
 
-                  ],
+                ],
+
+                viewerTools: {
+                    topLeft: 'label, pageCounter',
+                },
                 thumbnailWidth: 200,
                 thumbnailHeight: 200,
+               
                 fnThumbnailInit: myTnInit,
-                locationHash: false
+                // locationHash: false
 
             });
         });
-
 
 
 
