@@ -1,0 +1,65 @@
+﻿@page
+@model GenericRazorPortfolio.Pages.GalleryModel
+@{
+    ViewData["Title"] = "Gallery";
+}
+
+<div class="py-5 text-center">
+
+    <h1>Our Gallery</h1>
+
+
+
+    <link href="https://cdn.jsdelivr.net/npm/nanogallery2@3/dist/css/nanogallery2.min.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/nanogallery2@3/dist/jquery.nanogallery2.min.js"></script>
+
+
+    <div class="container">
+
+        <div ID="ngy2p" data-nanogallery2='{
+
+        "thumbnailWidth": "200",
+        "thumbnailLabel": {
+          "position": "overImageOnBottom",
+          "display": false
+        },
+        "descriptionMultiLine" : true,
+        "thumbnailAlignment": "center",
+        "thumbnailOpenImage": true,
+
+          "viewerTools":     {
+        "topLeft":    "label"
+      }
+
+      }'>
+
+            @foreach (var image in Model.Images)
+            {
+                @if (!String.IsNullOrEmpty(image.Description))
+                {
+                    @:Plain Text is good.
+                }
+
+            <a href="@image.Link" data-ngthumb="@image.ThumbnailLink" data-ngdesc="@if (!String.IsNullOrEmpty(image.Description))
+            {
+                @:@image.Description
+                }">
+
+                @if (!String.IsNullOrEmpty(image.Title))
+                {
+                    @:'@image.Title'
+                }
+                by @image.Author
+
+            </a>
+            }
+
+
+        </div>
+
+
+    </div>
+
+
+
+</div>
