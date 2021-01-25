@@ -28,7 +28,12 @@ namespace GenericRazorPortfolio.Pages
         public IActionResult OnGet()
         {
 
+            //var claims = User.Claims.ToList();
 
+            //foreach (Claim c in claims)
+            //{
+            //    Debug.WriteLine(c.Value);
+            //}
             return Page();
         }
 

@@ -53,28 +53,49 @@ namespace GenericRazorPortfolio.Pages
 
         }
 
-        public IActionResult OnPost()
+        public IActionResult OnPostDelete ()
 
         {
 
             ImageData image = _repo.GetImageById(Id);
 
 
-            if (ModelState.IsValid)
+
+            if (image != null)
+
             {
-                image.Title = ImageInfo.Title;
-                image.Description = ImageInfo.Description;
-                image.ThumbnailLink = ImageInfo.ThumbnailLink;
-                image.Link = ImageInfo.Link;
-
+                _repo.DeleteImage(image);
                 _repo.SaveChanges();
-
                 return RedirectToPage("./Gallery");
 
-            }
+    }
 
-            return BadRequest();
-        }
+
+            return NotFound();
+}
+
+public IActionResult OnPostEdit()
+
+{
+
+    ImageData image = _repo.GetImageById(Id);
+
+
+    if (ModelState.IsValid)
+    {
+        image.Title = ImageInfo.Title;
+        image.Description = ImageInfo.Description;
+        image.ThumbnailLink = ImageInfo.ThumbnailLink;
+        image.Link = ImageInfo.Link;
+
+        _repo.SaveChanges();
+
+        return RedirectToPage("./Gallery");
+
+    }
+
+    return BadRequest();
+}
 
     }
 }

@@ -50,5 +50,10 @@ namespace GenericRazorPortfolio.Data
             return _context.ImageData.FirstOrDefault(x => id == x.Id);
 
         }
+
+        public void DeleteImage(ImageData img)
+        {
+            _context.ImageData.Remove(img);
+        }
     }
 }

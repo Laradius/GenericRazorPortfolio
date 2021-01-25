@@ -16,6 +16,8 @@ namespace GenericRazorPortfolio.Data
 
         void SaveChanges();
 
+        void DeleteImage(ImageData img);
+
         Task SaveChangesAsync();
 
         public void CreateImage(ImageData image);
