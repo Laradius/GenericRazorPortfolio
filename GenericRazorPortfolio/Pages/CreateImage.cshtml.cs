@@ -18,7 +18,7 @@ namespace GenericRazorPortfolio.Pages
     [Authorize]
     public class CreateImageModel : PageModel
     {
-        private IGenericRazorPortfolioRepo _repo;
+        private readonly IGenericRazorPortfolioRepo _repo;
 
         public CreateImageModel(IGenericRazorPortfolioRepo repo)
         {
@@ -28,12 +28,7 @@ namespace GenericRazorPortfolio.Pages
         public IActionResult OnGet()
         {
 
-            var claims = User.Claims.ToList();
 
-            foreach (Claim c in claims)
-            {
-                Debug.WriteLine(c.Value);
-            }
             return Page();
         }
 
@@ -49,19 +44,21 @@ namespace GenericRazorPortfolio.Pages
                 return Page();
             }
 
-           
 
-            ImageData data = new ImageData();
-            data.Link = ImageData.Link;
-            data.ThumbnailLink = ImageData.ThumbnailLink;
-            data.Description = ImageData.Description;
-            data.Title = ImageData.Title;
-            data.Author = this.GetClaimValue("Name");
+
+            ImageData data = new ImageData
+            {
+                Link = ImageData.Link,
+                ThumbnailLink = ImageData.ThumbnailLink,
+                Description = ImageData.Description,
+                Title = ImageData.Title,
+                Author = this.GetClaimValue("Name")
+            };
 
 
             _repo.CreateImage(data);
             await _repo.SaveChangesAsync();
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Gallery");
         }
     }
 }

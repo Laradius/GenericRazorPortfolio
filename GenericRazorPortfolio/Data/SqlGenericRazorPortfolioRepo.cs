@@ -8,7 +8,7 @@ namespace GenericRazorPortfolio.Data
 {
     public class SqlGenericRazorPortfolioRepo : IGenericRazorPortfolioRepo
     {
-        private GenericRazorPortfolioDbContext _context;
+        private readonly GenericRazorPortfolioDbContext _context;
 
         public SqlGenericRazorPortfolioRepo(GenericRazorPortfolioDbContext context)
         {

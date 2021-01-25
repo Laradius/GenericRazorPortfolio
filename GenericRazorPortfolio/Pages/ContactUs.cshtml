@@ -1,4 +1,47 @@
 ﻿@page
 @model GenericRazorPortfolio.Pages.ContactUsModel
 @{
+    ViewData["Title"] = "Contact Us";
+}
+
+
+
+<div class="py-5">
+    <h1 class="display-4 text-center">Contact Us</h1>
+
+    <hr />
+    <div class="row">
+
+        <div class="col-1 col-md-3"> </div>
+        <div class="col-10 col-md-6">
+            <form method="post" class="text-center">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="Message.From" class="control-label"></label>
+                    <input asp-for="Message.From" class="form-control" />
+                    <span asp-validation-for="Message.From" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Message.Title" class="control-label"></label>
+                    <input asp-for="Message.Title" class="form-control" />
+                    <span asp-validation-for="Message.Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Message.Message" class="control-label"></label>
+                    <input asp-for="Message.Message" class="form-control" />
+                    <span asp-validation-for="Message" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Send" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+        <div class="col-1 col-md-3"> </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

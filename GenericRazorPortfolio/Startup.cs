@@ -33,11 +33,12 @@ namespace GenericRazorPortfolio
             services.AddRazorPages();
             services.AddDbContext<GenericRazorPortfolioDbContext>(opt => opt.UseSqlServer(Configuration["ConnectionString"]));
             services.AddScoped<IGenericRazorPortfolioRepo, SqlGenericRazorPortfolioRepo>();
+            services.AddScoped<IEmailSender, SmtpProvider>();
             services.AddScoped<IAuthenticator, JwtAuthenticator>();
-             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
-             {
-              options.TokenValidationParameters = JwtAuthorizer.GetValidationParameters();
-             });
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = JwtAuthorizer.GetValidationParameters();
+            });
 
 
         }
@@ -49,12 +50,12 @@ namespace GenericRazorPortfolio
             {
                 app.UseDeveloperExceptionPage();
                 app.UseStatusCodePagesWithRedirects("/Error?code={0}");
-               
+
             }
             else
             {
                 app.UseExceptionHandler("/Error");
-                app.UseStatusCodePagesWithRedirects("/Error?code={0}");         
+                app.UseStatusCodePagesWithRedirects("/Error?code={0}");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
@@ -64,9 +65,9 @@ namespace GenericRazorPortfolio
 
 
             app.UseRouting();
-          app.UseMiddleware<JwtMiddleware>();
-           app.UseAuthentication();
-             app.UseAuthorization();
+            app.UseMiddleware<JwtMiddleware>();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

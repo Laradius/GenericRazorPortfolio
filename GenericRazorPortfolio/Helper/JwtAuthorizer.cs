@@ -20,10 +20,9 @@ namespace GenericRazorPortfolio.Helper
             var tokenHandler = new JwtSecurityTokenHandler();
             var validationParameters = GetValidationParameters();
 
-            SecurityToken validatedToken;
             try
             {
-                IPrincipal principal = tokenHandler.ValidateToken(authToken, validationParameters, out validatedToken);
+                IPrincipal principal = tokenHandler.ValidateToken(authToken, validationParameters, out SecurityToken validatedToken);
             }
             catch
             {

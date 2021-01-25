@@ -27,19 +27,19 @@ namespace GenericRazorPortfolio.Pages
         [BindProperty]
         public LoginDto Admin { get; set; }
 
-      
+
 
 
         public void OnGet()
         {
-          //  Debug.WriteLine(PasswordHash.ScryptHashString("123", PasswordHash.Strength.Medium));
+            // Debug.WriteLine(PasswordHash.ScryptHashString("", PasswordHash.Strength.Medium));
         }
 
 
 
         public IActionResult OnPost()
         {
-            
+
             if (!ModelState.IsValid)
             {
                 return Page();
