@@ -20,6 +20,8 @@ namespace GenericRazorPortfolio.Data
 
         public void CreateImage(ImageData image);
 
+        public ImageData GetImageById(int id);
+
 
     }
 }

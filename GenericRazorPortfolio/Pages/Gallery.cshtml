@@ -49,7 +49,7 @@
                                     <text>"@image.Title"</text>
 
                                 }
-                                <text>by @image.Author</text>
+                                <text> by @image.Author</text>
 
                                 } ', description: '@if (!String.IsNullOrEmpty(image.Description)) {@image.Description}',  customData: { imgId: @image.Id} },
 
@@ -65,7 +65,7 @@
                 },
                 thumbnailWidth: 200,
                 thumbnailHeight: 200,
-               
+
                 fnThumbnailInit: myTnInit,
                 // locationHash: false
 
@@ -77,9 +77,12 @@
 
         // Add custom elements after one thumbnail is build
         function myTnInit($e, item, GOMidx) {
+
+            console.log("I am alive!")
             var html = [];
-            html.push(
-                '<a @(Model.TokenValid ? "" : "hidden") href="/EditImage?id=', item.customData.imgId, '" style="text-shadow: 0 0 3px #000; position:absolute;top:10px;right:10px; color:white; font-size: 32px;"><i class="editIcon fas fa-pen-square"></i></a>')
+
+
+            html.push('<a @(Model.TokenValid ? "" : "hidden") href="/EditImage?id=', item.customData.imgId, '" style="text-shadow: 0 0 3px #000; position:absolute;top:10px;right:10px; color:white; font-size: 32px;"><i class="editIcon fas fa-pen-square"></i></a>')
 
 
             $e.find('.nGY2GThumbnailSub').append(html.join(""));

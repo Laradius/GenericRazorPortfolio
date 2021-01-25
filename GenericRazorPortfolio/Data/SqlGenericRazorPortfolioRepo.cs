@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GenericRazorPortfolio.Data
 {
-   public class SqlGenericRazorPortfolioRepo : IGenericRazorPortfolioRepo
+    public class SqlGenericRazorPortfolioRepo : IGenericRazorPortfolioRepo
     {
         private GenericRazorPortfolioDbContext _context;
 
@@ -43,6 +43,12 @@ namespace GenericRazorPortfolio.Data
         public Task SaveChangesAsync()
         {
             return _context.SaveChangesAsync();
+        }
+
+        public ImageData GetImageById(int id)
+        {
+            return _context.ImageData.FirstOrDefault(x => id == x.Id);
+
         }
     }
 }

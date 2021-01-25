@@ -34,8 +34,6 @@ namespace GenericRazorPortfolio
             services.AddDbContext<GenericRazorPortfolioDbContext>(opt => opt.UseSqlServer(Configuration["ConnectionString"]));
             services.AddScoped<IGenericRazorPortfolioRepo, SqlGenericRazorPortfolioRepo>();
             services.AddScoped<IAuthenticator, JwtAuthenticator>();
-            services.AddScoped<IAuthorizer, JwtAuthorizer>();
-
              services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
              {
               options.TokenValidationParameters = JwtAuthorizer.GetValidationParameters();

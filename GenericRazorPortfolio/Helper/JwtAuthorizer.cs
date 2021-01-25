@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace GenericRazorPortfolio.Helper
 {
-    public class JwtAuthorizer : IAuthorizer
+    public class JwtAuthorizer
     {
 
 
